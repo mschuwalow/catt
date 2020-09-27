@@ -62,7 +62,7 @@ class YtdlOptParamType(click.ParamType):
         return (ykey, yval)
 
 
-YTDL_OPT = YtdlParsedParamType()
+YTDL_OPT = YtdlOptParamType()
 
 def process_url(ctx, param, value):
     if value == "-":

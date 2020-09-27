@@ -3,6 +3,7 @@ import configparser
 import random
 import sys
 import time
+import json
 from pathlib import Path
 from threading import Thread
 from urllib.parse import urlparse
@@ -57,12 +58,11 @@ class YtdlOptParamType(click.ParamType):
             self.fail("{} is not a valid key/value pair.".format(value))
 
         ykey, yval = value.split("=", 1)
-        yval = {"true": True, "false": False}.get(yval.lower().strip(), yval)
+        yval = json.loads(yval)
         return (ykey, yval)
 
 
-YTDL_OPT = YtdlOptParamType()
-
+YTDL_OPT = YtdlParsedParamType()
 
 def process_url(ctx, param, value):
     if value == "-":
